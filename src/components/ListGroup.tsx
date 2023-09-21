@@ -1,9 +1,13 @@
+import { MouseEvent } from "react";
+
 function ListGroup() {
   let states = ["New York", "California", "Nevada", "Michigan", "New Jersey"];
   // states = [];
 
   const message = states.length === 0 && <p>No states found!</p>;
   // in React, if an expression is "true && a", it'll return a. If it's "false && b", it'll return false.
+
+  const HandleClick = (event: MouseEvent) => console.log(states); // this is a type declaration; we are saying that "event" is a MouseEvent.
 
   return (
     // <> tells react to wrap the two elements in one "fragement", bypassing an error we would get since React functions can only output one element
@@ -16,7 +20,7 @@ function ListGroup() {
           <li
             className="list-group-item"
             key={states}
-            onClick={() => console.log(states, index)}
+            onClick={(event) => console.log(states)}
           >
             {states}
           </li>
