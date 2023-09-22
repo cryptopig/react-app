@@ -1,13 +1,18 @@
-import { MouseEvent } from "react";
+import { useState } from "react";
 
 function ListGroup() {
-  let states = ["New York", "California", "Nevada", "Michigan", "New Jersey"];
-  // states = [];
+  let usStates = ["New York", "California", "Nevada", "Michigan", "New Jersey"];
 
-  const message = states.length === 0 && <p>No states found!</p>;
+  let selectedIndex = 0;
+
+  const message = usStates.length === 0 && <p>No usStates found!</p>;
+
+  const arr = useState(-1);
+  arr[1];
+  arr[0];
   // in React, if an expression is "true && a", it'll return a. If it's "false && b", it'll return false.
 
-  const HandleClick = (event: MouseEvent) => console.log(states); // this is a type declaration; we are saying that "event" is a MouseEvent.
+  // HandleClick is called an "event handler" beacuse it handles the click event.
 
   return (
     // <> tells react to wrap the two elements in one "fragement", bypassing an error we would get since React functions can only output one element
@@ -16,13 +21,17 @@ function ListGroup() {
       <h1>List</h1>
       {message}
       <ul className="list-group">
-        {states.map((states, index) => (
+        {usStates.map((usStates, index) => (
           <li
-            className="list-group-item"
-            key={states}
-            onClick={(event) => console.log(states)}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={usStates}
+            onClick={() => (selectedIndex = index)}
           >
-            {states}
+            {usStates}
           </li>
         ))}
       </ul>
