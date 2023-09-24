@@ -1,15 +1,19 @@
 import { useState } from "react";
 
-function ListGroup() {
-  let usStates = ["New York", "California", "Nevada", "Michigan", "New Jersey"];
+// interfaces are almost like classes; a template for components
+interface ListGroupProp {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
 
-  let selectedIndex = 0;
+function ListGroup({ items, heading }: ListGroupProp) {
+  // using {} to seperate elements is called "destructuring", which can make code simpler.
+  const message = items.length === 0 && <p>No usStates found!</p>;
 
-  const message = usStates.length === 0 && <p>No usStates found!</p>;
-
-  const arr = useState(-1);
-  arr[1];
-  arr[0];
+  const [selectedIndex, setSelectedIndex] = useState(-1); // useState is an array
+  // arr[0]; variable (selectedIndex)
+  // arr[1]; updater function
   // in React, if an expression is "true && a", it'll return a. If it's "false && b", it'll return false.
 
   // HandleClick is called an "event handler" beacuse it handles the click event.
@@ -18,10 +22,10 @@ function ListGroup() {
     // <> tells react to wrap the two elements in one "fragement", bypassing an error we would get since React functions can only output one element
     // (either h1 or list, not both).
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {message}
       <ul className="list-group">
-        {usStates.map((usStates, index) => (
+        {items.map((usStates, index) => (
           <li
             className={
               selectedIndex === index
@@ -29,7 +33,7 @@ function ListGroup() {
                 : "list-group-item"
             }
             key={usStates}
-            onClick={() => (selectedIndex = index)}
+            onClick={() => setSelectedIndex(index)}
           >
             {usStates}
           </li>
