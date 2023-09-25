@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-// interfaces are almost like classes; a template for components
+// interfaces are arguments for functions, and are immutable (read only)
 interface ListGroupProp {
   items: string[];
   heading: string;
   onSelectItem: (item: string) => void;
 }
 
-function ListGroup({ items, heading }: ListGroupProp) {
+// template for a ListGroup in the website
+function ListGroup({ items, heading, onSelectItem }: ListGroupProp) {
   // using {} to seperate elements is called "destructuring", which can make code simpler.
   const message = items.length === 0 && <p>No usStates found!</p>;
 
@@ -25,17 +26,20 @@ function ListGroup({ items, heading }: ListGroupProp) {
       <h1>{heading}</h1>
       {message}
       <ul className="list-group">
-        {items.map((usStates, index) => (
+        {items.map((items, index) => (
           <li
             className={
               selectedIndex === index
                 ? "list-group-item active"
                 : "list-group-item"
             }
-            key={usStates}
-            onClick={() => setSelectedIndex(index)}
+            key={items}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelectItem(items);
+            }}
           >
-            {usStates}
+            {items}
           </li>
         ))}
       </ul>
